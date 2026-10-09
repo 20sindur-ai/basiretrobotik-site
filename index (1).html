@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Basiret Robotik | Entegratörler için görüntü işleme danışmanlığı</title>
+<meta name="description" content="Basiret Robotik, otomasyon ve robotik entegratörlerine görüntü işleme danışmanlığı veren Denizli merkezli bir mühendislik ekibidir.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --calc: #EEF2F1;
+    --calc-2: #E2E9E8;
+    --ink: #15262E;
+    --ink-soft: #4A5D64;
+    --mineral: #2F7F96;
+    --mineral-deep: #1F5E70;
+    --rule: #C5D1D1;
+    --max: 1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--calc);color:var(--ink);
+    font-family:"Archivo",system-ui,sans-serif;font-stretch:100%;
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--mineral);outline-offset:3px;border-radius:2px}
+  .wrap{max-width:var(--max);margin:0 auto;padding-left:24px;padding-right:24px}
+
+  header{border-bottom:1px solid var(--rule)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px}
+  .mark{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-stretch:118%;font-size:19px;letter-spacing:-.01em}
+  .mark svg{flex:none}
+  nav{display:flex;align-items:center;gap:26px;font-size:15px}
+  nav a{text-decoration:none;color:var(--ink-soft)}
+  nav a:hover{color:var(--ink)}
+  .lang{border:1px solid var(--rule);background:transparent;border-radius:999px;padding:5px 12px;font:inherit;font-size:14px;color:var(--ink);cursor:pointer}
+  .lang:hover{border-color:var(--ink-soft)}
+
+  .hero{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;padding-top:72px;padding-bottom:88px}
+  h1{margin:0 0 22px;font-weight:800;font-stretch:122%;font-size:clamp(36px,5vw,58px);line-height:1.03;letter-spacing:-.025em}
+  .lede{margin:0 0 32px;max-width:33em;font-size:19px;color:var(--ink-soft)}
+  .btn{display:inline-block;background:var(--ink);color:var(--calc);text-decoration:none;padding:14px 22px;border-radius:6px;font-weight:600;font-size:16px}
+  .btn:hover{background:var(--mineral-deep)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink);margin-left:10px}
+  .btn-ghost:hover{background:var(--ink);color:var(--calc)}
+
+  .feed{position:relative;margin:0;border-radius:10px;overflow:hidden;background:var(--ink);aspect-ratio:13/10}
+  .feed svg{display:block;width:100%;height:100%}
+  .feed figcaption{position:absolute;left:11%;bottom:6%;font-size:13px;color:#9FB6BC;font-stretch:88%}
+  .scan{animation:scan 4.5s linear infinite}
+  @keyframes scan{from{transform:translateX(0)}to{transform:translateX(520px)}}
+  .grip{animation:grip 4.5s ease-in-out infinite}
+  @keyframes grip{0%,20%{transform:translateY(-34px)}45%,70%{transform:translateY(0)}100%{transform:translateY(-34px)}}
+  @media (prefers-reduced-motion: reduce){.scan{animation:none;opacity:0}.grip{animation:none}html{scroll-behavior:auto}}
+
+  section{padding:84px 0;border-top:1px solid var(--rule)}
+  h2{margin:0 0 14px;font-weight:800;font-stretch:115%;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-.02em}
+  .intro{margin:0 0 48px;max-width:36em;color:var(--ink-soft);font-size:18px}
+  h3{margin:0 0 10px;font-weight:700;font-stretch:108%;font-size:22px;line-height:1.25}
+
+  .problem{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+  .problem div{border-top:3px solid var(--ink);padding-top:20px}
+  .problem p{margin:0;color:var(--ink-soft)}
+
+  /* loop with ownership */
+  .loop{list-style:none;margin:0 0 36px;padding:0;display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch}
+  .loop li.stage{border-radius:10px;padding:26px 24px;background:var(--calc-2)}
+  .loop li.stage.yours{background:transparent;border:2px dashed var(--rule)}
+  .loop .owner{display:inline-block;font-size:14px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--mineral);color:#fff;margin-bottom:14px}
+  .loop .yours .owner{background:transparent;color:var(--ink-soft);border:1px solid var(--rule)}
+  .loop .verb{display:block;font-weight:800;font-stretch:120%;font-size:30px;line-height:1;margin-bottom:12px;color:var(--mineral-deep)}
+  .loop .yours .verb{color:var(--ink-soft)}
+  .loop p{margin:0;color:var(--ink-soft)}
+  .loop li.arrow{display:flex;align-items:center;justify-content:center;width:44px;color:var(--mineral)}
+  .diff{margin:0;max-width:40em;font-size:19px;font-weight:600;line-height:1.45}
+
+  /* offer */
+  .offer{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:36px 40px}
+  .offer li{border-top:1px solid var(--rule);padding-top:18px}
+  .offer h3{font-size:19px;margin-bottom:6px}
+  .offer p{margin:0;color:var(--ink-soft)}
+
+  .apps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
+  .apps li{padding:20px 0;border-top:1px solid var(--rule)}
+  .apps h3{font-size:19px;margin-bottom:6px}
+  .apps p{margin:0;color:var(--ink-soft)}
+
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 48px;padding:0;list-style:none}
+  .chips li{background:var(--calc-2);border-radius:999px;padding:9px 18px;font-size:16px}
+  .promises{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+  .promises div{padding:26px 26px}
+  .promises div + div{border-left:1px solid var(--rule)}
+  .promises h3{font-size:19px;margin-bottom:6px}
+  .promises p{margin:0;color:var(--ink-soft)}
+
+  .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);counter-reset:s}
+  .steps li{counter-increment:s;padding:0 24px 0 0;position:relative}
+  .steps li::before{content:counter(s);display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid var(--mineral);color:var(--mineral-deep);font-weight:800;margin-bottom:18px;background:var(--calc);position:relative;z-index:1}
+  .steps li:not(:last-child)::after{content:"";position:absolute;top:20px;left:40px;right:0;height:2px;background:var(--rule)}
+  .steps h3{font-size:20px}
+  .steps p{margin:0;color:var(--ink-soft)}
+
+  .team{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  .person{display:flex;gap:20px;align-items:flex-start}
+  .avatar{flex:none;width:64px;height:64px;border-radius:50%;background:var(--ink);color:var(--calc);display:flex;align-items:center;justify-content:center;font-weight:800;font-stretch:120%;font-size:22px}
+  .person:nth-child(2) .avatar{background:var(--mineral)}
+  .person p{margin:0;color:var(--ink-soft)}
+  .person .role{color:var(--ink);font-weight:600;margin-bottom:6px}
+
+  .contact{background:var(--ink);color:var(--calc);border-top:none}
+  .contact h2{color:var(--calc)}
+  .contact .intro{color:#A9BEC3}
+  .contact-row{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-end;justify-content:space-between}
+  .contact dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 24px;font-size:18px}
+  .contact dt{color:#8FA7AD}
+  .contact dd{margin:0}
+  .contact .btn{background:var(--calc);color:var(--ink)}
+  .contact .btn:hover{background:#fff}
+  footer{background:var(--ink);color:#7F969C;font-size:14px;padding:22px 0;border-top:1px solid #2A3E47}
+
+  @media (max-width: 960px){
+    .steps{grid-template-columns:1fr 1fr;gap:36px 0}
+    .steps li:nth-child(2)::after{display:none}
+  }
+  @media (max-width: 860px){
+    nav a{display:none}
+    .hero{grid-template-columns:1fr;gap:40px;padding-top:48px;padding-bottom:64px}
+    .problem,.team,.offer{grid-template-columns:1fr;gap:32px}
+    .apps{grid-template-columns:1fr}
+    .promises{grid-template-columns:1fr}
+    .promises div + div{border-left:none;border-top:1px solid var(--rule)}
+    .loop{grid-template-columns:1fr}
+    .loop li.arrow{width:auto;height:40px;transform:rotate(90deg)}
+    .steps{grid-template-columns:1fr;gap:28px}
+    .steps li{padding:0 0 0 60px}
+    .steps li::before{position:absolute;left:0;top:-4px;margin:0}
+    .steps li:not(:last-child)::after,.steps li:nth-child(2)::after{display:block;top:40px;bottom:-28px;left:19px;right:auto;width:2px;height:auto}
+    section{padding:64px 0}
+  }
+  @media (max-width: 480px){
+    .wrap{padding-left:16px;padding-right:16px}
+    .btn-ghost{margin:10px 0 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="mark" href="#top" aria-label="Basiret Robotik">
+      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
+        <path d="M2 15 Q15 3 28 15 Q15 27 2 15Z" fill="none" stroke="#15262E" stroke-width="2.4"/>
+        <circle cx="15" cy="15" r="4.6" fill="#2F7F96"/>
+      </svg>
+      Basiret Robotik
+    </a>
+    <nav aria-label="Ana menü">
+      <a href="#rolumuz" data-i18n="nav_role">Rolümüz</a>
+      <a href="#hizmetler" data-i18n="nav_services">Hizmetler</a>
+      <a href="#ekip" data-i18n="nav_team">Ekip</a>
+      <a href="#iletisim" data-i18n="nav_contact">İletişim</a>
+      <button class="lang" id="lang" type="button" aria-label="Switch to English">EN</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <h1 data-i18n="hero_title">Otomasyon projelerinizin görüntü işleme ortağı.</h1>
+      <p class="lede" data-i18n="hero_lede">Entegratörlere ve makine üreticilerine görüntü işleme danışmanlığı veriyoruz. Klasik otomasyon ve robotik projelerinizin görme ve karar alma süreçlerini sizinle birlikte geliştiriyoruz.</p>
+      <a class="btn" href="mailto:info@basiretrobotik.com?subject=Proje%20g%C3%B6r%C3%BC%C5%9Fmesi" data-i18n="cta_mail">Projenizi konuşalım</a>
+      <a class="btn btn-ghost" href="#rolumuz" data-i18n="cta_more">Neyi üstleniyoruz</a>
+    </div>
+
+    <figure class="feed">
+      <svg viewBox="0 0 520 400" role="img" aria-labelledby="feedTitle">
+        <title id="feedTitle">Bant üzerinde farklı açılarla duran parçalar; kamera her birinin açısını ölçüyor, robot tutucusu birini almak üzere iniyor, biri hatalı olarak işaretlenmiş.</title>
+        <defs>
+          <linearGradient id="glow" x1="0" x2="1">
+            <stop offset="0" stop-color="#5FB3C9" stop-opacity="0"/>
+            <stop offset="1" stop-color="#5FB3C9" stop-opacity=".22"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="190" width="520" height="120" fill="#1D323B"/>
+        <g stroke="#2A4450" stroke-width="2">
+          <line x1="0" y1="190" x2="520" y2="190"/><line x1="0" y1="310" x2="520" y2="310"/>
+          <line x1="40" y1="310" x2="60" y2="190"/><line x1="140" y1="310" x2="160" y2="190"/>
+          <line x1="240" y1="310" x2="260" y2="190"/><line x1="340" y1="310" x2="360" y2="190"/>
+          <line x1="440" y1="310" x2="460" y2="190"/>
+        </g>
+        <g fill="#C9D6D8" stroke="#8FA4A9" stroke-width="2">
+          <g transform="translate(78 250) rotate(-18)"><rect x="-34" y="-18" width="68" height="36" rx="5"/><circle cx="-18" cy="0" r="6" fill="#1D323B"/><circle cx="18" cy="0" r="6" fill="#1D323B"/></g>
+          <g transform="translate(198 250) rotate(32)"><rect x="-34" y="-18" width="68" height="36" rx="5"/><circle cx="-18" cy="0" r="6" fill="#1D323B"/><circle cx="18" cy="0" r="6" fill="#1D323B"/></g>
+          <g transform="translate(318 250) rotate(8)"><path d="M-34 -13 Q-34 -18 -29 -18 L10 -18 L18 -6 L34 -6 L34 13 Q34 18 29 18 L-29 18 Q-34 18 -34 13 Z"/><circle cx="-18" cy="0" r="6" fill="#1D323B"/></g>
+          <g transform="translate(438 250) rotate(-41)"><rect x="-34" y="-18" width="68" height="36" rx="5"/><circle cx="-18" cy="0" r="6" fill="#1D323B"/><circle cx="18" cy="0" r="6" fill="#1D323B"/></g>
+        </g>
+        <g stroke-width="2" stroke-dasharray="4 4">
+          <line x1="48" y1="260" x2="108" y2="240" stroke="#3FA672"/>
+          <line x1="172" y1="234" x2="224" y2="266" stroke="#5FB3C9"/>
+          <line x1="410" y1="274" x2="466" y2="226" stroke="#3FA672"/>
+        </g>
+        <g fill="none" stroke-width="2.5">
+          <rect x="36" y="208" width="84" height="84" rx="3" stroke="#3FA672"/>
+          <rect x="156" y="208" width="84" height="84" rx="3" stroke="#5FB3C9"/>
+          <rect x="276" y="208" width="84" height="84" rx="3" stroke="#E0473A"/>
+          <rect x="396" y="208" width="84" height="84" rx="3" stroke="#3FA672"/>
+        </g>
+        <g font-family="Archivo, sans-serif" font-size="13" font-weight="700">
+          <rect x="36" y="296" width="44" height="20" fill="#3FA672"/><text x="43" y="311" fill="#0E1C21">−18°</text>
+          <rect x="156" y="296" width="44" height="20" fill="#5FB3C9"/><text x="164" y="311" fill="#0E1C21">32°</text>
+          <rect x="276" y="296" width="44" height="20" fill="#E0473A"/><text x="283" y="311" fill="#fff">NOK</text>
+          <rect x="396" y="296" width="44" height="20" fill="#3FA672"/><text x="403" y="311" fill="#0E1C21">−41°</text>
+        </g>
+        <g class="grip">
+          <rect x="190" y="40" width="16" height="118" fill="#7F969C"/>
+          <rect x="172" y="150" width="52" height="16" rx="3" fill="#A9BEC3"/>
+          <rect x="174" y="164" width="10" height="30" rx="2" fill="#A9BEC3"/>
+          <rect x="212" y="164" width="10" height="30" rx="2" fill="#A9BEC3"/>
+        </g>
+        <g stroke="#6F8B92" stroke-width="2" fill="none">
+          <path d="M20 44 V20 H44"/><path d="M476 20 H500 V44"/>
+          <path d="M20 356 V380 H44"/><path d="M500 356 V380 H476"/>
+        </g>
+        <g class="scan">
+          <rect x="-60" y="20" width="60" height="360" fill="url(#glow)"/>
+          <line x1="0" y1="20" x2="0" y2="380" stroke="#5FB3C9" stroke-width="2"/>
+        </g>
+      </svg>
+      <figcaption data-i18n="feed_caption">Örnek: bantta açısı ölçülen parçayı alma</figcaption>
+    </figure>
+  </div>
+
+  <section id="sorun">
+    <div class="wrap">
+      <h2 data-i18n="prob_title">Görüntü işleme ayrı bir uzmanlık</h2>
+      <p class="intro" data-i18n="prob_intro">Müşterileriniz giderek daha sık "kamera da olsun" diyor. Ama görme işi, mekanik ve PLC tarafından farklı bir bilgi birikimi istiyor.</p>
+      <div class="problem">
+        <div>
+          <h3 data-i18n="pr1_title">Ekipte uzman yok</h3>
+          <p data-i18n="pr1_text">Tek bir proje için görüntü işleme mühendisi istihdam etmek çoğu zaman maliyet açısından mantıklı değildir.</p>
+        </div>
+        <div>
+          <h3 data-i18n="pr2_title">Sorunlar sahada çıkar</h3>
+          <p data-i18n="pr2_text">Yanlış lens, yetersiz aydınlatma ya da kalibrasyon hatası genellikle devreye alma günü ortaya çıkar ve projeyi geciktirir.</p>
+        </div>
+        <div>
+          <h3 data-i18n="pr3_title">Hazır kameralar her işe yetmez</h3>
+          <p data-i18n="pr3_text">Akıllı kameralar basit işlerde iyidir; değişken parça, yansıyan yüzey ya da doğal malzemede yetersiz kalabilir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rolumuz">
+    <div class="wrap">
+      <h2 data-i18n="role_title">Projede neyi üstleniyoruz</h2>
+      <p class="intro" data-i18n="role_intro">Görme tarafını biz, karar tarafını sizinle birlikte üstleniyoruz. Makine, robot ve hattın mekanik ve elektrik kısımları sizin uzmanlık alanınızda kalıyor.</p>
+      <ol class="loop">
+        <li class="stage">
+          <span class="owner" data-i18n="own_us">Biz</span>
+          <span class="verb" data-i18n="l1_verb">Gör</span>
+          <p data-i18n="l1_text">Kamera, lens ve aydınlatma ile parçayı, konumunu, yönünü, yolu ya da hatayı tespit eden yazılım.</p>
+        </li>
+        <li class="arrow" aria-hidden="true"><svg width="28" height="20" viewBox="0 0 28 20"><path d="M2 10 H24 M16 3 L24 10 L16 17" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></li>
+        <li class="stage">
+          <span class="owner" data-i18n="own_both">Birlikte</span>
+          <span class="verb" data-i18n="l2_verb">Karar ver</span>
+          <p data-i18n="l2_text">Görüntüyü robot koordinatlarına ve karara çeviriyor, sizin PLC ve robot kontrolcülerinizle haberleşmesini sağlıyoruz.</p>
+        </li>
+        <li class="arrow" aria-hidden="true"><svg width="28" height="20" viewBox="0 0 28 20"><path d="M2 10 H24 M16 3 L24 10 L16 17" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></li>
+        <li class="stage yours">
+          <span class="owner" data-i18n="own_you">Siz</span>
+          <span class="verb" data-i18n="l3_verb">Uygula</span>
+          <p data-i18n="l3_text">Robot, makine, mekanik tasarım, pano ve hattın kurulumunu siz gerçekleştirirsiniz.</p>
+        </li>
+      </ol>
+      <p class="diff" data-i18n="role_diff">Biz bir entegratör değiliz. Sizin projenize görüntü işleme uzmanlığı ekleyen bir danışmanlık ekibiyiz.</p>
+    </div>
+  </section>
+
+  <section id="hizmetler">
+    <div class="wrap">
+      <h2 data-i18n="off_title">Hizmetler</h2>
+      <p class="intro" data-i18n="off_intro">Projenin hangi aşamasında olursanız olun, ihtiyacınız olan kısmı üstlenebiliriz.</p>
+      <ul class="offer">
+        <li><h3 data-i18n="o1_title">Fizibilite ve numune testi</h3><p data-i18n="o1_text">Teklif aşamasında, numune parçalarınızla sürecin kamerayla yapılıp yapılamayacağını test ediyoruz.</p></li>
+        <li><h3 data-i18n="o2_title">Donanım seçimi</h3><p data-i18n="o2_text">İşe en uygun kamera, lens ve aydınlatmayı marka bağımsız olarak belirliyoruz.</p></li>
+        <li><h3 data-i18n="o3_title">Yazılım geliştirme</h3><p data-i18n="o3_text">Konum bulma, yön tespiti, ölçüm ve hata tespiti için projeye özel görüntü işleme yazılımı geliştiriyoruz.</p></li>
+        <li><h3 data-i18n="o4_title">Kalibrasyon ve haberleşme</h3><p data-i18n="o4_text">Kamera ile robot arasındaki kalibrasyonu yapıyor, PLC ya da robot kontrolcüsüyle veri alışverişini kuruyoruz.</p></li>
+        <li><h3 data-i18n="o5_title">Devreye alma desteği</h3><p data-i18n="o5_text">Sahada ekibinizle birlikte sistemi ayarlıyor ve gerçek üretim koşullarında doğruluyoruz.</p></li>
+        <li><h3 data-i18n="o6_title">Teknik destek</h3><p data-i18n="o6_text">Devreye alma sonrasında ortaya çıkabilecek görüntü işleme sorunlarında yanınızdayız.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="uygulamalar">
+    <div class="wrap">
+      <h2 data-i18n="apps_title">Destek verdiğimiz görme işleri</h2>
+      <p class="intro" data-i18n="apps_intro">Parçanın, yolun ya da malzemenin sürekli değiştiği ve kamerasız sistemlerin yetersiz kaldığı işler.</p>
+      <ul class="apps">
+        <li><h3 data-i18n="a1_title">Parça alma ve taşıma</h3><p data-i18n="a1_text">Kasadan rastgele parça alma (bin picking), karışık kolilerden ürün seçme, banttaki parçayı takip ederek alma.</p></li>
+        <li><h3 data-i18n="a2_title">Yol takibi</h3><p data-i18n="a2_text">Kaynak dikişi, yapıştırma, sızdırmazlık, çapak alma, taşlama ve polisaj.</p></li>
+        <li><h3 data-i18n="a3_title">Montaj ve hassas yerleştirme</h3><p data-i18n="a3_text">Milimetre altı hassasiyet gerektiren hizalama ve montaj işlemleri.</p></li>
+        <li><h3 data-i18n="a4_title">Muayene ve ölçüm</h3><p data-i18n="a4_text">Ürünleri OK/NOK olarak ayıran görsel kalite kontrol ve boyut ölçümü.</p></li>
+        <li><h3 data-i18n="a5_title">Doğal ve düzensiz malzemeler</h3><p data-i18n="a5_text">Kumaş, deri, gıda ve mermer gibi her parçası birbirinden farklı malzemeler.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="kimlerle">
+    <div class="wrap">
+      <h2 data-i18n="who_title">Kimlerle çalışıyoruz</h2>
+      <p class="intro" data-i18n="who_intro">Otomasyon projelerinde görüntü işleme tarafında güvenilir bir çözüm ortağı arayan firmalar.</p>
+      <ul class="chips">
+        <li data-i18n="w1">Robot entegratörleri</li>
+        <li data-i18n="w2">Otomasyon ve PLC firmaları</li>
+        <li data-i18n="w3">Özel makine üreticileri</li>
+        <li data-i18n="w4">Test ve kalite kontrol makinesi üreticileri</li>
+      </ul>
+      <div class="promises">
+        <div>
+          <h3 data-i18n="pm1_title">Projenizde, arka planda</h3>
+          <p data-i18n="pm1_text">Projelerinizde arka planda çözüm ortağınız olarak yer alırız. Son kullanıcılarınıza doğrudan teklif vermez, ticari sınırlarınıza saygı duyarız.</p>
+        </div>
+        <div>
+          <h3 data-i18n="pm2_title">Gizlilik</h3>
+          <p data-i18n="pm2_text">Proje bilgileriniz bizde gizli kalır. Talep ederseniz gizlilik sözleşmesi (NDA) imzalarız.</p>
+        </div>
+        <div>
+          <h3 data-i18n="pm3_title">Markadan bağımsız</h3>
+          <p data-i18n="pm3_text">Tercih ettiğiniz robot, PLC ve kamera markalarına uyum sağlarız.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="surec">
+    <div class="wrap">
+      <h2 data-i18n="proc_title">Bir proje nasıl ilerler</h2>
+      <p class="intro" data-i18n="proc_intro">Riski en başta, numunelerle test ederek azaltıyoruz.</p>
+      <ol class="steps">
+        <li><h3 data-i18n="p1_title">Projeyi dinliyoruz</h3><p data-i18n="p1_text">İhtiyacı, çevrim süresini ve sahadaki kısıtları sizden öğreniyoruz.</p></li>
+        <li><h3 data-i18n="p2_title">Numunelerle test</h3><p data-i18n="p2_text">Parçalarınızla ön denemeler yapıyor, beklenen başarı oranını raporluyoruz.</p></li>
+        <li><h3 data-i18n="p3_title">Geliştirme</h3><p data-i18n="p3_text">Yazılımı geliştiriyor, PLC ve robotla haberleşme altyapısını hazırlıyoruz.</p></li>
+        <li><h3 data-i18n="p4_title">Sahada devreye alma</h3><p data-i18n="p4_text">Ekibinizle birlikte sistemi gerçek üretim koşullarında ayarlayıp size teslim ediyoruz.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="ekip">
+    <div class="wrap">
+      <h2 data-i18n="team_title">Ekip</h2>
+      <p class="intro" data-i18n="team_intro">Biri otomasyondan, diğeri görüntü işlemeden gelen iki kurucu. Projenizin iki tarafının dilini de konuşuyoruz.</p>
+      <div class="team">
+        <div class="person">
+          <div class="avatar" aria-hidden="true">YD</div>
+          <div>
+            <h3>Yusuf Emre Duran</h3>
+            <p class="role" data-i18n="yusuf_role">Kurucu ortak, PLC ve robotik</p>
+            <p data-i18n="yusuf_text">Politecnico di Milano, Otomasyon Mühendisliği. PLC ve robot haberleşmesi, sahada devreye alma.</p>
+          </div>
+        </div>
+        <div class="person">
+          <div class="avatar" aria-hidden="true">BS</div>
+          <div>
+            <h3>Bilal Sınav</h3>
+            <p class="role" data-i18n="bilal_role">Kurucu ortak, görüntü işleme</p>
+            <p data-i18n="bilal_text">Boğaziçi Üniversitesi, Elektrik-Elektronik Mühendisliği. Ar-Ge ve görüntü işleme yazılımı.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="iletisim">
+    <div class="wrap">
+      <h2 data-i18n="con_title">Bir projenizde görüntü işleme mi gerekiyor?</h2>
+      <p class="intro" data-i18n="con_intro">Projeyi kısaca anlatın, numunelerinizle birlikte test edelim.</p>
+      <div class="contact-row">
+        <dl>
+          <dt data-i18n="con_mail">E-posta</dt><dd><a href="mailto:info@basiretrobotik.com">info@basiretrobotik.com</a></dd>
+          <dt data-i18n="con_loc">Konum</dt><dd data-i18n="con_city">Denizli, Türkiye</dd>
+        </dl>
+        <a class="btn" href="mailto:info@basiretrobotik.com?subject=Proje%20g%C3%B6r%C3%BC%C5%9Fmesi" data-i18n="cta_mail">Projenizi konuşalım</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© <span id="yr">2026</span> Basiret Robotik</div>
+</footer>
+
+<script>
+  const EN = {
+    nav_role:"Our role", nav_services:"Services", nav_team:"Team", nav_contact:"Contact",
+    hero_title:"The machine vision partner for your automation projects.",
+    hero_lede:"We provide machine vision consulting to integrators and machine builders. We develop the seeing and decision-making side of your classic automation and robotics projects together with you.",
+    cta_mail:"Let's discuss your project", cta_more:"What we take on",
+    feed_caption:"Example: picking a part after measuring its angle on the conveyor",
+    prob_title:"Machine vision is a separate expertise",
+    prob_intro:"Your customers increasingly ask for a camera too. But vision needs a different skill set from mechanics and PLC work.",
+    pr1_title:"No specialist on the team", pr1_text:"Hiring a vision engineer for a single project is rarely cost-effective.",
+    pr2_title:"Problems show up on site", pr2_text:"The wrong lens, poor lighting or a calibration error usually appears on commissioning day and delays the project.",
+    pr3_title:"Smart cameras don't fit every job", pr3_text:"Smart cameras work well for simple tasks, but can fall short with variable parts, reflective surfaces or natural materials.",
+    role_title:"What we take on in a project",
+    role_intro:"We take on the seeing, and the deciding together with you. The machine, the robot and the mechanical and electrical side of the line remain your area of expertise.",
+    own_us:"Us", own_both:"Together", own_you:"You",
+    l1_verb:"See", l1_text:"Software that uses camera, lens and lighting to detect the part, its position and orientation, the path, or the defect.",
+    l2_verb:"Decide", l2_text:"We turn the image into robot coordinates and decisions, and connect it to your PLC and robot controller.",
+    l3_verb:"Act", l3_text:"The robot, the machine, mechanical design, panels and line installation stay in your project.",
+    role_diff:"We are not an integrator. We are a consulting team that adds machine vision expertise to your project.",
+    off_title:"Services",
+    off_intro:"Whatever stage your project is at, we can take on the part you need.",
+    o1_title:"Feasibility and sample testing", o1_text:"At the quoting stage, we test with your sample parts whether the job can be done with a camera.",
+    o2_title:"Hardware selection", o2_text:"We select the right camera, lens and lighting for the job, independent of brand.",
+    o3_title:"Software development", o3_text:"We develop project-specific vision software for locating parts, detecting orientation, measuring and finding defects.",
+    o4_title:"Calibration and communication", o4_text:"We calibrate the camera to the robot and set up data exchange with the PLC or robot controller.",
+    o5_title:"Commissioning support", o5_text:"On site, we tune the system with your team and validate it under real production conditions.",
+    o6_title:"Technical support", o6_text:"We stay with you on vision issues that come up after commissioning.",
+    apps_title:"Vision tasks we support",
+    apps_intro:"Jobs where the part, path or material is different every time, and a system without a camera falls short.",
+    a1_title:"Picking and handling", a1_text:"Bin picking, picking from mixed cartons, and conveyor tracking.",
+    a2_title:"Path tracking", a2_text:"Weld seams, gluing, sealing, deburring, grinding and polishing.",
+    a3_title:"Assembly and precision placement", a3_text:"Alignment and assembly steps that need sub-millimeter precision.",
+    a4_title:"Inspection and measurement", a4_text:"Visual quality control that sorts products as OK/NOK, and dimensional measurement.",
+    a5_title:"Natural and irregular materials", a5_text:"Materials like fabric, leather, food and marble, where every piece is different.",
+    who_title:"Who we work with",
+    who_intro:"Companies running automation projects that want a reliable partner on the vision side.",
+    w1:"Robot integrators", w2:"Automation and PLC companies", w3:"Special machine builders", w4:"Test and quality inspection machine builders",
+    pm1_title:"In your project, in the background", pm1_text:"We work in the background as your solution partner. We don't make direct offers to your end customers, and we respect your commercial boundaries.",
+    pm2_title:"Confidentiality", pm2_text:"Your project information stays confidential. We are happy to sign an NDA.",
+    pm3_title:"Brand-independent", pm3_text:"We adapt to the robot, PLC and camera brands you use.",
+    proc_title:"How a project runs",
+    proc_intro:"We reduce risk early by testing with your samples.",
+    p1_title:"We listen", p1_text:"We learn the requirement, cycle time and site constraints from you.",
+    p2_title:"Sample testing", p2_text:"We run trials with your parts and report the expected success rate.",
+    p3_title:"Development", p3_text:"We develop the software and prepare communication with the PLC and robot.",
+    p4_title:"On-site commissioning", p4_text:"We tune the system under real production conditions with your team and hand it over to you.",
+    team_title:"Team", team_intro:"Two founders, one from automation and one from computer vision. We speak both sides of your project.",
+    yusuf_role:"Co-founder, PLC and robotics", yusuf_text:"Politecnico di Milano, Automation Engineering. PLC and robot communication, on-site commissioning.",
+    bilal_role:"Co-founder, computer vision", bilal_text:"Boğaziçi University, Electrical & Electronics Engineering. R&D and vision software.",
+    con_title:"Does one of your projects need machine vision?", con_intro:"Tell us about the project briefly and let's test it together with your samples.",
+    con_mail:"Email", con_loc:"Location", con_city:"Denizli, Turkey"
+  };
+  const nodes = document.querySelectorAll("[data-i18n]");
+  const TR = {};
+  nodes.forEach(n => { TR[n.dataset.i18n] = n.textContent; });
+  const btn = document.getElementById("lang");
+  let lang = "tr";
+  function apply(l){
+    const dict = l === "en" ? EN : TR;
+    nodes.forEach(n => { const k = n.dataset.i18n; if (dict[k]) n.textContent = dict[k]; });
+    document.documentElement.lang = l;
+    btn.textContent = l === "en" ? "TR" : "EN";
+    btn.setAttribute("aria-label", l === "en" ? "Türkçeye geç" : "Switch to English");
+    document.title = l === "en" ? "Basiret Robotik | Machine vision consulting for integrators" : "Basiret Robotik | Entegratörler için görüntü işleme danışmanlığı";
+    lang = l;
+  }
+  btn.addEventListener("click", () => apply(lang === "tr" ? "en" : "tr"));
+  if ((navigator.language || "").toLowerCase().startsWith("en")) apply("en");
+  document.getElementById("yr").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
