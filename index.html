@@ -5,7 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Basiret Robotik | Görüntü işleme, robotik ve Physical AI</title>
 <meta name="description" content="Basiret Robotik; görüntü işleme, robotik ve ikisinin birleşimi olan Physical AI üzerine çalışan Denizli merkezli bir mühendislik ekibidir.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-50 -50 100 100'%3E%3Ccircle r='42' fill='none' stroke='%231A1A1A' stroke-width='12'/%3E%3Cpath d='M20 0 L10 17.3 L-10 17.3 L-20 0 L-10 -17.3 L10 -17.3Z' fill='%2316A34A'/%3E%3C/svg%3E">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Basiret Robotik","url":"https://www.basiretrobotik.com/","logo":"https://www.basiretrobotik.com/icon-512.png","email":"info@basiretrobotik.com","address":{"@type":"PostalAddress","addressLocality":"Denizli","addressCountry":"TR"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -475,9 +479,15 @@
     if (still) wordEl.textContent = "Physical AI";
   }
   langBtns.forEach(b => b.addEventListener("click", () => setLang(b.dataset.l)));
-  // tarayıcı dili İngilizce ya da İtalyancaysa o dilde aç; diğer herkes Türkçe görür
+  // Dil seçimi: önce adresteki ?lang=en / ?lang=it, sonra tarayıcı dili.
+  // Arama motoru botları (Google İngilizce tarayıcıyla gezer) her zaman Türkçe görür;
+  // yoksa Google sitenin başlığını İngilizce kaydeder.
+  const qLang = new URLSearchParams(location.search).get("lang");
+  const isBot = /bot|crawl|spider|slurp|lighthouse|google|bing|yandex|baidu|duckduck/i.test(navigator.userAgent);
   const nav0 = (navigator.language || "").toLowerCase();
-  if (nav0.startsWith("en")) setLang("en"); else if (nav0.startsWith("it")) setLang("it");
+  if (qLang && DICT[qLang]) setLang(qLang);
+  else if (!isBot && nav0.startsWith("en")) setLang("en");
+  else if (!isBot && nav0.startsWith("it")) setLang("it");
   document.getElementById("yr").textContent = new Date().getFullYear();
 </script>
 </body>
